@@ -2,4 +2,6 @@
     <string name="app_name">NoteApp</string>
     <string name="main_activity">Main Activity</string>
     <string name="login_activity">Login activity</string>
+    <string name="user_name">نام کاربری</string>
+    <string name="password">رمز عبور</string>
 </resources>
