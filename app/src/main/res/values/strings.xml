@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NoteApp</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="login_activity">Login activity</string>
+</resources>
