@@ -4,6 +4,6 @@
     <string name="login_activity">Login activity</string>
     <string name="user_name">نام کاربری</string>
     <string name="password">رمز عبور</string>
-    <string name="login_Button">ورود</string>
+    <string name="login_Button">ثبت نام</string>
     <string name="login_toast_message">لطفا تمامی مقادیر را پر کنید</string>
 </resources>

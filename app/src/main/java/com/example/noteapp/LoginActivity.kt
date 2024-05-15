@@ -22,6 +22,10 @@ class LoginActivity : AppCompatActivity() {
         editor = preferences.edit()
         editor.apply()
 
+
+        val appOpen = preferences.getBoolean("openApp", false)
+        if (appOpen) binding.loginButton.text = "ورود"
+
         binding.loginButton.setOnClickListener {
 
             val userEditText = binding.usernameEditText.text.toString()
@@ -31,16 +35,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.login_toast_message), Toast.LENGTH_SHORT)
                     .show()
             } else {
-                val appOpen = preferences.getBoolean("openApp", false)
 
                 if (appOpen) {
                     if (userEditText == preferences.getString("userNameSave", "test") &&
                         passEditText == preferences.getString("passSave", "test")
                     ) {
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("message", "Hello $userEditText")
-                        startActivity(intent)
+                        goToMainActivity(userEditText)
                     } else {
                         Toast.makeText(
                             this,
@@ -54,11 +54,15 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("passSave", passEditText).apply()
                     editor.putBoolean("openApp", true).apply()
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("message", "Hello $userEditText")
-                    startActivity(intent)
+                    goToMainActivity(userEditText)
                 }
             }
         }
+    }
+    fun goToMainActivity(userEditText : String){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("message", "Hello $userEditText")
+        startActivity(intent)
+        finish()
     }
 }
