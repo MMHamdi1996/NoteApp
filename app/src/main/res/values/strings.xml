@@ -6,4 +6,5 @@
     <string name="password">رمز عبور</string>
     <string name="login_Button">ثبت نام</string>
     <string name="login_toast_message">لطفا تمامی مقادیر را پر کنید</string>
+    <string name="save_button">ذخیره</string>
 </resources>

@@ -1,16 +1,15 @@
-package com.example.noteapp
+package com.example.noteapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.noteapp.database.NotesData
 import com.example.noteapp.databinding.RecyclerLayoutBinding
 
 
-class MyAdapter(var context: Context, var itemList: MutableList<DataClass>) :
+class MyAdapter(var context: Context, var itemList: MutableList<NotesData>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(val binding: RecyclerLayoutBinding) : ViewHolder(binding.root)
@@ -24,6 +23,7 @@ override fun getItemCount(): Int {
 }
 
 override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-    holder.binding.title.text = itemList[position].itemListDataClass
+    holder.binding.title.text = itemList[position].title
+    holder.binding.title.text = itemList[position].description
 }
 }
