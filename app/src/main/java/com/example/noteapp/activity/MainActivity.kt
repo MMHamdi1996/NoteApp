@@ -17,13 +17,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-        var itemList = mutableListOf<NotesData>()
-        itemList.add(NotesData("a" , "1"))
-        itemList.add(NotesData("b" , "3"))
-
-        val adapter = MyAdapter(this, itemList)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+//        var itemList = mutableListOf<NotesData>()
+//        itemList.add(NotesData("a" , "1"))
+//        itemList.add(NotesData("b" , "3"))
+//
+//        val adapter = MyAdapter(this, itemList)
+//        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+//        binding.recyclerView.adapter = adapter
 
         binding.addButton.setOnClickListener{
             val intent = Intent(this , AddNotesActivity::class.java)
