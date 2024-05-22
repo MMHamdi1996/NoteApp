@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.noteapp.activity.AddNotesActivity
+import com.example.noteapp.database.NotesDao
 import com.example.noteapp.database.NotesData
+import com.example.noteapp.database.NotesDataBase
 import com.example.noteapp.databinding.RecyclerLayoutBinding
 
 
 class MyAdapter(var context: Context, var getAllNOtes: MutableList<NotesData>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    private var notesDao: NotesDao = NotesDataBase.dataBaseBuilder(context).getNotesDao()
 
     inner class MyViewHolder(val binding: RecyclerLayoutBinding) : ViewHolder(binding.root)
 
@@ -34,5 +37,13 @@ override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         intent.putExtra("position" , position)
         context.startActivity(intent)
     }
+
+    holder.binding.deleteImageView.setOnClickListener{
+        val notesDataPosition = getAllNOtes[position]
+        getAllNOtes.removeAt(position)
+        notesDao.deleteNotes(notesDataPosition)
+        notifyDataSetChanged()
+    }
 }
+
 }
