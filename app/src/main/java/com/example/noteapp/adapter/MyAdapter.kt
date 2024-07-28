@@ -44,6 +44,13 @@ override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         notesDao.deleteNotes(notesDataPosition)
         notifyDataSetChanged()
     }
+
+    holder.binding.editTextView.setOnClickListener{
+        val intent = Intent(context ,AddNotesActivity::class.java )
+        intent.putExtra("editNotes" , true )
+        intent.putExtra("position" , position)
+        context.startActivity(intent)
+    }
 }
 
 }

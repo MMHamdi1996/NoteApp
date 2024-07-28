@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.noteapp.R
 import com.example.noteapp.database.NotesData
 import com.example.noteapp.adapter.MyAdapter
 import com.example.noteapp.database.NotesDao
@@ -17,8 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notesDao: NotesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
         notesDao = NotesDataBase.dataBaseBuilder(this).getNotesDao()

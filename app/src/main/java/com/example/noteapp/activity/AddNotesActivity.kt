@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import com.example.noteapp.R
 import com.example.noteapp.database.NotesDao
 import com.example.noteapp.database.NotesData
@@ -14,18 +15,18 @@ import com.example.noteapp.databinding.ActivityAddNotesBinding
 class AddNotesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNotesBinding
     private lateinit var notesDao: NotesDao
-    private var showNotes : Boolean = false
+    private var showNotes: Boolean = false
+    private var editNotes: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddNotesBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_notes)
         notesDao = NotesDataBase.dataBaseBuilder(this).getNotesDao()
 
-        var intent : Intent = intent
-        showNotes = intent.getBooleanExtra("showNotes" , false)
-        val position = intent.getIntExtra("position" , 0)
+        var intent: Intent = intent
+        showNotes = intent.getBooleanExtra("showNotes", false)
+        val position = intent.getIntExtra("position", 0)
 
-        if (showNotes){
+        if (showNotes) {
             binding.addNotesActivityTitleView.text = "نمایش یادداشت"
             binding.saveButton.visibility = View.GONE
             binding.titleNotesText.isEnabled = false
@@ -34,13 +35,21 @@ class AddNotesActivity : AppCompatActivity() {
             binding.desEditText.setText(notesDao.getAllNOtes()[position].description)
         }
 
+        editNotes = intent.getBooleanExtra("editNotes" , false)
+
+        if(editNotes){
+            binding.addNotesActivityTitleView.text = "ویرایش یادداشت"
+            binding.titleNotesText.setText(notesDao.getAllNOtes()[position].title)
+            binding.desEditText.setText(notesDao.getAllNOtes()[position].description)
+        }
+
 
         binding.saveButton.setOnClickListener {
             val title = binding.titleNotesText.text.toString()
             val description = binding.desEditText.text.toString()
-            val notesData = NotesData(title = title , description = description)
+            val notesData = NotesData(title = title, description = description)
             notesDao.insertNotes(notesData)
-            val intent = Intent(this , MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

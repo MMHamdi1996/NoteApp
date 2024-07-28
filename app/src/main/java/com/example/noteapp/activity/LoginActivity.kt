@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import com.example.noteapp.R
 import com.example.noteapp.databinding.ActivityLoginBinding
 
@@ -14,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityLoginBinding.inflate(LayoutInflater.from(this))
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
