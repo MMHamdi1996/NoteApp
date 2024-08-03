@@ -1,10 +1,9 @@
-package com.example.noteapp.database
+package com.example.noteapp.model
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Insert as In
 
 @Dao
 interface NotesDao {

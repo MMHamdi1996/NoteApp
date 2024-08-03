@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.noteapp.activity.AddNotesActivity
-import com.example.noteapp.database.NotesDao
-import com.example.noteapp.database.NotesData
-import com.example.noteapp.database.NotesDataBase
 import com.example.noteapp.databinding.RecyclerLayoutBinding
+import com.example.noteapp.model.NotesDao
+import com.example.noteapp.model.NotesData
+import com.example.noteapp.model.NotesDataBase
+import com.example.noteapp.view.MainActivity
 
 
 class MyAdapter(var context: Context, var getAllNOtes: MutableList<NotesData>) :
@@ -23,34 +23,34 @@ class MyAdapter(var context: Context, var getAllNOtes: MutableList<NotesData>) :
         MyViewHolder(RecyclerLayoutBinding.inflate(LayoutInflater.from(context), parent, false))
 
 
-override fun getItemCount(): Int {
-    return getAllNOtes.size
-}
-
-override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-    holder.binding.title.text = getAllNOtes[position].title
-    holder.binding.describtion.text = getAllNOtes[position].description
-
-    holder.binding.recyclerLayoutLayaout.setOnClickListener{
-        val intent = Intent(context ,AddNotesActivity::class.java )
-        intent.putExtra("showNotes" , true )
-        intent.putExtra("position" , position)
-        context.startActivity(intent)
+    override fun getItemCount(): Int {
+        return getAllNOtes.size
     }
 
-    holder.binding.deleteImageView.setOnClickListener{
-        val notesDataPosition = getAllNOtes[position]
-        getAllNOtes.removeAt(position)
-        notesDao.deleteNotes(notesDataPosition)
-        notifyDataSetChanged()
-    }
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.binding.title.text = getAllNOtes[position].title
+        holder.binding.describtion.text = getAllNOtes[position].description
 
-    holder.binding.editTextView.setOnClickListener{
-        val intent = Intent(context ,AddNotesActivity::class.java )
-        intent.putExtra("editNotes" , true )
-        intent.putExtra("position" , position)
-        context.startActivity(intent)
+        holder.binding.recyclerLayoutLayaout.setOnClickListener{
+            val intent = Intent(context , MainActivity::class.java )
+            intent.putExtra("showNotes" , true )
+            intent.putExtra("position" , position)
+            context.startActivity(intent)
+        }
+
+        holder.binding.deleteImageView.setOnClickListener{
+            val notesDataPosition = getAllNOtes[position]
+            getAllNOtes.removeAt(position)
+            notesDao.deleteNotes(notesDataPosition)
+            notifyDataSetChanged()
+        }
+
+        holder.binding.editTextView.setOnClickListener{
+            val intent = Intent(context ,MainActivity::class.java )
+            intent.putExtra("editNotes" , true )
+            intent.putExtra("position" , position)
+
+        }
     }
-}
 
 }

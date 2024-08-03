@@ -1,12 +1,10 @@
-package com.example.noteapp.activity
+package com.example.noteapp.view
 
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import com.example.noteapp.R
 import com.example.noteapp.databinding.ActivityLoginBinding
