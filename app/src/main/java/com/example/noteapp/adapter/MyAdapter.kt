@@ -31,26 +31,25 @@ class MyAdapter(var context: Context, var getAllNOtes: MutableList<NotesData>) :
         holder.binding.title.text = getAllNOtes[position].title
         holder.binding.describtion.text = getAllNOtes[position].description
 
-        holder.binding.recyclerLayoutLayaout.setOnClickListener{
-            val intent = Intent(context , MainActivity::class.java )
-            intent.putExtra("showNotes" , true )
-            intent.putExtra("position" , position)
+        holder.binding.recyclerLayoutLayaout.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("showNotes", true)
+            intent.putExtra("position", position)
             context.startActivity(intent)
         }
 
-        holder.binding.deleteImageView.setOnClickListener{
+        holder.binding.deleteImageView.setOnClickListener {
             val notesDataPosition = getAllNOtes[position]
             getAllNOtes.removeAt(position)
             notesDao.deleteNotes(notesDataPosition)
             notifyDataSetChanged()
         }
 
-        holder.binding.editTextView.setOnClickListener{
-            val intent = Intent(context ,MainActivity::class.java )
-            intent.putExtra("editNotes" , true )
-            intent.putExtra("position" , position)
-
+        holder.binding.editTextView.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("editNotes", true)
+            intent.putExtra("position", position)
+            context.startActivity(intent)
         }
     }
-
 }
